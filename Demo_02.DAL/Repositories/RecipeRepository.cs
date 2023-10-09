@@ -80,7 +80,26 @@ namespace Demo_02.DAL.Repositories
             return recipe;
         }
 
-       
+        public IEnumerable<RecipeIngredient> GetIngredients(int recipeId)
+        {
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM [MM_Recipe_Ingredient] WHERE [RecipeId] = @Id";
+                command.AddParamWithValue("Id", recipeId);
+
+                _DbConnection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        yield return MapperRI(reader);
+                    }
+                }
+                _DbConnection.Close();
+            };
+        }
+
+
         public Recipe Create(Recipe entity)
         {
             throw new NotImplementedException();
@@ -96,24 +115,7 @@ namespace Demo_02.DAL.Repositories
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<RecipeIngredient> GetIngredients(int recipeId)
-        {
-            using(DbCommand command = _DbConnection.CreateCommand())
-            {
-                command.CommandText = "SELECT * FROM [MM_Recipe_Ingredient] WHERE [RecipeId] = @Id";
-                command.AddParamWithValue("Id", recipeId);
-
-                _DbConnection.Open();
-                using(DbDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        yield return MapperRI(reader);
-                    }
-                }
-                _DbConnection.Close();
-            };
-        }
+        
         public bool AddIngredient(int recipeId, RecipeIngredient ingredient)
         {
             throw new NotImplementedException();
