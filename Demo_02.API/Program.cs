@@ -18,8 +18,10 @@ builder.Services.AddTransient<DbConnection>(service =>
 // - BLL
 // On injecte le IngredientService qui devra correspondre à l'interface IIngredientService
 builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddScoped<IRecipeService, RecipeService>();
 // - DAL
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
+builder.Services.AddScoped<IRecipeRepository,  RecipeRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
