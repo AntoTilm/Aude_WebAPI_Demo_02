@@ -13,6 +13,7 @@ namespace Demo_02.DAL.Interfaces
         IEnumerable<RecipeIngredient> GetIngredients(int recipeId);
 
         // A partir d'une recette, on va vouloir ajouter ou supprimer un ingrédient (et sa quantité/unité)
+        bool AddIngredients(int recipeId, IEnumerable<RecipeIngredient> ingredients);
         bool AddIngredient(int recipeId, RecipeIngredient ingredient);
         bool RemoveIngredient(int recipeId, int ingredientId);
     }
